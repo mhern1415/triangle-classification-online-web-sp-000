@@ -1,40 +1,39 @@
-require 'pry'
 class Triangle
-  def initialize(side1, side2, side3)
-    @triangle_sides = []
-    @triangle_sides << side1
-    @triangle_sides << side2
-    @triangle_sides << side3
-  end
-
-  def valid?
-    sum_one_two = @triangle_sides[0] + @triangle_sides[1]
-    sum_one_three = @triangle_sides[0] + @triangle_sides[2]
-    sum_two_three = @triangle_sides[1] + @triangle_sides[2]
-
-    if (@triangle_sides.none? {|side| side <= 0}) &&
-      (sum_one_two > @triangle_sides[2] && sum_one_three > @triangle_sides[1] && sum_two_three > @triangle_sides[0])
-      return true
-    else
-      return false
-    end
+  attr_accessor :x, :y, :z
+  def initialize(x, y, z)
+    @x = x
+    @y = y
+    @z = z
   end
 
   def kind
-    if valid?
-      if @triangle_sides.uniq.length == 1
-        return :equilateral
-      elsif @triangle_sides.uniq.length == 2
-        return :isosceles
-      else
-        return :scalene
-      end
-    else
-      raise TriangleError
-    end
+    if kosher_triangle == true && kosher_triangle2 == true 
+      puts true 
+    else 
+      raise TriangleError 
+    end 
+    
+    if x == y && y == z && x == z
+      :equilateral
+    elsif x != y && y != z && z != x
+      :scalene 
+    else 
+      :isosceles
+    end 
   end
+  
+  def kosher_triangle 
+    x.positive? && y.positive? && z.positive?
+  end 
+  
+  def kosher_triangle2 
+    x + y > z && x + z > y && y + z > x
+  end 
 end
 
 class TriangleError < StandardError
-
+  
 end
+
+a = Triangle.new(5, 5, 5)
+a.kind
