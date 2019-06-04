@@ -1,10 +1,10 @@
 require 'pry'
 class Triangle
-  def initialize(side_1, side_2, side_3)
+  def initialize(side1, side2, side3)
     @triangle_sides = []
-    @triangle_sides << side_1
-    @triangle_sides << side_2
-    @triangle_sides << side_3
+    @triangle_sides << side1
+    @triangle_sides << side2
+    @triangle_sides << side3
   end
 
   def valid?
